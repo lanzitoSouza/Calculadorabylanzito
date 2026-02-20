@@ -1,0 +1,152 @@
+ <!DOCTYPE html> 
+ <html lang="pt-br">  
+<head>  
+    <meta charset="UTF-8"> 
+    <link rel="stylesheet" href="styles.css">  
+<title>Calculadora by Lanzito</title>  
+<style>  
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }  
+  body {  
+    background-color:#521b89;  
+    display: flex;  
+    justify-content: center;  
+  }  
+  h1 {  
+    color: #fff;  
+    text-align: center;  
+      
+  }  
+
+  .calc {  
+    background-color: black;  
+    width: 280px;  
+    border-radius: 10px;  
+    padding: 10px;  
+  }
+  .butoes {
+    
+    display: grid;  
+    grid-template-columns: repeat(4, 1fr);  
+    gap: 8px;  
+  }
+  .butao {  
+    font-size: 18px;  
+    height: 40px;  
+    border: none;  
+    border-radius: 5px;  
+    background-color: gray;  
+  }  
+  .butao:active {  
+    background-color: darkgray;  
+  }  
+  p {  
+    padding: 5px;  
+    font-size: 28px;  
+    overflow: hidden;  
+    text-align: right;  
+    background-color: #fff;  
+    border-radius: 5px;  
+    margin-bottom: 10px;  
+  }  
+  .operador {  
+    background-color:#6b23b2;  
+    
+  }  
+  .operador:active {  
+    background-color:#8a39da;  
+  }  
+  .p {  
+    text-align: center;  
+    font-size: 0.5;  
+    color: #fff;  
+  }  
+</style>
+
+</head>  
+<body>  
+    <div class="fundo">  
+    <h1>CALCULADORA</h1>  
+    <div class="calc">  
+      <p id="resu">0</p>  
+      <div class="butoes">  
+      <button class="butao" onclick="limpar()">C</button>  
+      <button class="butao" onclick="add('%')">%</button>  
+      <button class="butao" onclick="ad)">7</button>  
+      <button class="butao operador" onclick="add('/')">÷</button>  
+      <button class="butao" onclick="add(7)">7</button>  
+      <button class="butao" onclick="add(8)">8</button>  
+      <button class="butao" onclick="add(9)">9</button>  
+      <button class="butao operador" onclick="add('*')">x</button>  
+      <button class="butao" onclick="add(4)">4</button>  
+      <button class="butao" onclick="add(5)">5</button>  
+      <button class="butao" onclick="add(6)">6</button>  
+      <button class="butao operador" onclick="add('-')">-</button>  
+      <button class="butao" onclick="add(1)">1</button>  
+      <button class="butao" onclick="add(2)">2</button>  
+      <button class="butao" onclick="add(3)">3</button>  
+      <button class="butao operador" onclick="add('+')">+</button>  
+      <button class="butao" onclick="add(0)">0</button>  
+      <button class="butao" onclick="add(',')">,</button>  
+      <button class="butao" onclick="apagar()">⌫</button>  
+      <button class="butao" onclick="calcular()">=</button>  
+      </div>  
+    <h6 class="p">© Lanzito 2026</h6>  
+    </div>  
+  </div>  
+  <script>
+let conta = "";
+const visor = document.getElementById("resu")
+const op = ['-','+','*','/']
+const LIMITE = 14
+
+function add(valor) {
+  let ultimo = conta.slice(-1)
+
+  if (valor === '%') {
+    if (conta === "" || op.includes(ultimo)) return
+    conta = (parseFloat(conta.replace(',', '.')) / 100).toString()
+    visor.innerText = conta.replace('.', ',')
+    return
+  }
+
+  if (conta.length >= LIMITE) return
+  if (conta === "" && op.includes(valor)) return
+  if (op.includes(valor) && op.includes(ultimo)) return
+
+  if (valor === ',') {
+    if (conta === "" || op.includes(ultimo)) return
+    let ultimoNumero = conta.split(/[\+\-\*\/]/).pop()
+    if (ultimoNumero.includes('.')) return
+    conta += '.'
+  } else {
+    conta += valor
+  }
+
+  visor.innerText = conta.replace(/\./g, ',')
+}
+
+function limpar() {
+  conta = ""
+  visor.innerText = "0"
+}
+
+function calcular() {
+  try {
+    let expressao = conta.replace(/,/g, '.')
+    let resultado = eval(expressao).toString()
+    conta = resultado
+    visor.innerText = resultado.replace(/\./g, ',')
+  } catch {
+    visor.innerText = "erro"
+    conta = ""
+  }
+}
+
+function apagar() {
+  conta = conta.slice(0, -1)
+  visor.innerText = conta === "" ? "0" : conta.replace(/\./g, ',')
+}
+  </script>
+
+</body>  
+</html>
