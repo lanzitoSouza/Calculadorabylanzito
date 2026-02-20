@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A new web page">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="favicon.ico">
+    <title>minecraft gratis</title>
+    <style>
+    body {
+      background-image: url('mine.png');
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center; /* centraliza horizontal */
+      align-items: center;     /* centraliza vertical */
+    }
+    .caixa {
+      text-align: center;
+      background-color: #fffb;
+      border-radius: 15px;
+      font-size: 20px;
+      padding: 10px;
+      height: auto;
+    }
+    .image {
+      border-radius: 20px;
+      display: block;
+      margin: 20px auto;
+    }
+    button {
+      border: none;
+      padding: 15px 30px ;
+      font-size: 20px;
+      cursor: pointer;
+      background-color: green;
+      border-radius: 20px;
+    }
+    </style>
+</head>
+<body>
+        <div class="caixa">
+            <h1>Minecraft Gratis</h1>
+            <button id="Btn" class="btn" onclick="clicou()">Minecraft aqui</button>
+            <img class="image" id="im" src="macaco.png">
+        
+        </div>
+        <script>
+          let BTN = document.getElementById("Btn")
+          let imge = document.getElementById("im")
+          imge.style.display = "none"
+          function clicou() {
+            BTN.style.display = "none"
+            imge.style.display = "block"
+          }
+        </script>
+</body>
+</html>
